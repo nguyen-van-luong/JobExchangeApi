@@ -42,12 +42,10 @@ public class AuthController {
     }
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@Valid @RequestBody SignInRequest signin) {
-        System.out.println("quoc");
         return new ResponseEntity<>(authenticationService.signIn(signin), HttpStatus.OK);
     }
     @GetMapping("/refresh-token")
     public ResponseEntity<?> getRefreshToken(HttpServletRequest request) {
-        System.out.println("2");
         Cookie[] cookies = request.getCookies();
 
         if (cookies == null) {

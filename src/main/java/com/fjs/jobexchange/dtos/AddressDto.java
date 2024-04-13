@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class AddressDto {
 
     @NotNull(message = "Province không được để trống")
-    private Integer provinceId;
+    private Province province;
 
     @Size(max = 200)
     private String address;

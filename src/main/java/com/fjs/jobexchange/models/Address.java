@@ -22,7 +22,7 @@ public class Address {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "province_id", nullable = false, referencedColumnName = "id")
     private Province province;
 

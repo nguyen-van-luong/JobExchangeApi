@@ -29,4 +29,8 @@ public class UserService {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new ApiException("Không tìm thấy người dùng @" + username, HttpStatus.NOT_FOUND));
     }
+
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
 }

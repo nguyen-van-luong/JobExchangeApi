@@ -33,24 +33,12 @@ public class Student {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id", referencedColumnName = "id")
-    private Province province;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "industry_id", referencedColumnName = "id")
-    private Industry industry;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "specialization_id", referencedColumnName = "id")
-    private Specialization specialization;
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
     @Column(name = "gender")
     private Boolean gender;
 
     @Column(name = "address")
     private String address;
-
-    @Column(name = "cv")
-    private String cv;
 }

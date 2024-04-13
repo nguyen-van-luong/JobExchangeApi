@@ -25,8 +25,8 @@ public class IndustrySpecializationService {
         List<IndustrySpecialization> industrySpecializationList = new ArrayList<>();
         for (IndustrySpecializationDto dto : industrySpecializationDtos) {
             IndustrySpecialization industrySpecialization = new IndustrySpecialization();
-            Industry industry= industryService.findById(dto.getIndustryId());
-            Specialization specialization= specializationService.findById(dto.getSpecializationId());
+            Industry industry= industryService.findById(dto.getIndustry().getId());
+            Specialization specialization= specializationService.findById(dto.getSpecialization().getId());
             industrySpecialization.setIndustry(industry);
             industrySpecialization.setSpecialization(specialization);
             industrySpecializationList.add(industrySpecialization);

@@ -23,16 +23,16 @@ public class AddressService {
     private final AddressRepository addressRepository;
     private final ProvinceService provinceService;
     @Transactional
-    public List<Address> creates(List<AddressDto> addressDtoList) {
+    public List<Address> creates(List<AddressDto> addressListDtos) {
 
         List<Address> addresses = new ArrayList<>();
-        for (AddressDto dto : addressDtoList) {
+        for (AddressDto dto : addressListDtos) {
             Address address = new Address();
-            Province province= provinceService.findById(dto.getProvinceId());
+            Province province= provinceService.findById(dto.getProvince().getId());
             address.setProvince(province);
             address.setAddress(dto.getAddress());
             addresses.add(address);
-         }
+        }
         return addressRepository.saveAll(addresses);
     }
 }

@@ -23,11 +23,11 @@ public class IndustrySpecialization implements Serializable {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "industry_id", nullable = false, referencedColumnName = "id")
     private Industry industry;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "specialization_id", referencedColumnName = "id")
     private Specialization specialization;
 }

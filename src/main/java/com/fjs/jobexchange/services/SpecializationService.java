@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,11 @@ public class SpecializationService {
 
     public Specialization findById(Integer id){
         return specializationRepository.findById(id)
+                .orElseThrow(() -> new ApiException("Chuyên ngành không tồn tại!",HttpStatus.BAD_REQUEST));
+    }
+
+    public List<Specialization> findByIndustryId(Integer id) {
+        return specializationRepository.findByIndustryId(id)
                 .orElseThrow(() -> new ApiException("Chuyên ngành không tồn tại!",HttpStatus.BAD_REQUEST));
     }
 

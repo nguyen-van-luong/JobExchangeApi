@@ -24,7 +24,7 @@ public class Job  {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "employer_id", nullable = false, referencedColumnName = "id")
     private Employer employer;
 
@@ -36,20 +36,34 @@ public class Job  {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @NotNull
-    @Column(name = "ageFrom", nullable = false)
+    @Column(name = "age_from")
     private Integer ageFrom;
 
     @NotNull
-    @Column(name = "ageTo", nullable = false)
+    @Column(name = "age_to", nullable = false)
     private Integer ageTo;
 
-    @NotNull
-    @Column(name = "salary", nullable = false)
-    private Integer salary;
+    @Column(name = "salary_from")
+    private Integer salaryFrom;
+
+    @Column(name = "salary_to")
+    private Integer salaryTo;
+
+    @Column(name = "sex")
+    private Boolean sex;
+
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "degree")
+    private String degree;
+
+    @Column(name = "working_form")
+    private String workingForm;
+
     @NotNull
     @Column(name = "experience", nullable = false)
-    private Integer experience;
+    private String experience;
 
     @NotNull
     @Column(name = "description", nullable = false)
@@ -74,11 +88,11 @@ public class Job  {
     private Set<IndustrySpecialization> industrySpecializations;
 
     @NotNull
-    @Column(name = "isPrivate", nullable = false)
-    private boolean isPrivate;
+    @Column(name = "is_private", nullable = false)
+    private Boolean isPrivate;
 
     @NotNull
-    @Column(name = "updatedAt", nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
     @PrePersist

@@ -2,6 +2,7 @@ package com.fjs.jobexchange.services;
 
 import com.fjs.jobexchange.dtos.ApiException;
 import com.fjs.jobexchange.dtos.ProvinceDto;
+import com.fjs.jobexchange.models.Industry;
 import com.fjs.jobexchange.models.Province;
 import com.fjs.jobexchange.repositories.ProvinceRepository;
 import jakarta.transaction.Transactional;
@@ -9,10 +10,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProvinceService {
     private final ProvinceRepository provinceRepository;
+
+    public List<Province> findAll(){
+        return provinceRepository.findAll();
+    }
 
     public Province findById(Integer id){
         return provinceRepository.findById(id)

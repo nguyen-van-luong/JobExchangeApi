@@ -7,10 +7,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +20,11 @@ public class IndustryController {
     public ResponseEntity<?> create(@Valid @RequestBody IndustryDto industryDto) {
        Industry createIndustry = industryService.create(industryDto);
         return new ResponseEntity<>(createIndustry, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> findAll() {
+        List<Industry> industries = industryService.findAll();
+        return new ResponseEntity<>(industries, HttpStatus.OK);
     }
 }

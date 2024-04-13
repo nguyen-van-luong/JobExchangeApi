@@ -11,8 +11,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "employers")
-public class Employer {
+@Table(name = "skills")
+public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,14 +23,4 @@ public class Employer {
     @NotNull
     @Column(name = "name", nullable = false, length = 100)
     private String name;
-
-    @NotNull
-    @Column(name = "email", nullable = false)
-    private String email;
-
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "avatar_url")
-    private String avatarUrl;
 }

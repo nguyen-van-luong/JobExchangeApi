@@ -72,12 +72,12 @@ public class AuthenticationService {
     }
     public JsonWebToken signIn(SignInRequest request) {
         var user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new ApiException("Tài khoản hoặc mật khẩu không hợp lệ.", HttpStatus.UNAUTHORIZED));
+                .orElseThrow(() -> new ApiException("Tài khoản không hợp lệ.", HttpStatus.UNAUTHORIZED));
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         } catch (Exception e) {
-            throw new ApiException(e.getMessage(), HttpStatus.UNAUTHORIZED);
+            throw new ApiException("Mật khẩu không hợp lệ.", HttpStatus.UNAUTHORIZED);
         }
 
 

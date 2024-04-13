@@ -14,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 public class IndustrySpecializationDto {
     @NotNull(message = "industry không được để trống")
-    private Integer industryId;
+    private Industry industry;
     @NotNull(message = "specialization không được để trống")
-    private Integer specializationId;
+    private Specialization specialization;
 }

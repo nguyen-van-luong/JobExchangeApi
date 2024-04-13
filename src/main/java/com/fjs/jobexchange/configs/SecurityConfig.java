@@ -64,7 +64,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/signup/employer","/auth/signup/student","/auth/signin").permitAll()
                         .requestMatchers("/auth/refresh-token").permitAll()
-                        .requestMatchers("/industry/create","/specialization/create","/province/create").permitAll()
+                        .requestMatchers("/industry","/industry/create","/specialization/{id}","/specialization/create","/province/{id}","/province","/province/create").permitAll()
+                        .requestMatchers("/job/search","/skill/create","/cv/search","/job/{id}").permitAll()
                         .anyRequest().authenticated())
 
                 .authenticationProvider(authenticationProvider())

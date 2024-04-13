@@ -45,9 +45,6 @@ public class User implements UserDetails {
     @Column(name = "role", nullable = false, length = 20)
     private Role role;
 
-    @Column(name = "avatar_url")
-    private String avatarUrl;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.toString()));

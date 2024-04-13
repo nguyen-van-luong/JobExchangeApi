@@ -10,10 +10,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class IndustryService {
     private final IndustryRepository industryRepository;
+
+    public List<Industry> findAll(){
+        return industryRepository.findAll();
+    }
     public Industry findById(Integer id){
         return industryRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Ngành không tồn tại!",HttpStatus.BAD_REQUEST));
