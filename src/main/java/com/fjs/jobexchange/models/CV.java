@@ -28,6 +28,9 @@ public class CV {
     @JoinColumn(name = "student_id", nullable = false, referencedColumnName = "id")
     private Student student;
 
+    @Column(name = "avatar")
+    private String avatar;
+
     @NotNull
     @Column(name = "fullname", nullable = false)
     private String fullname;
@@ -56,24 +59,20 @@ public class CV {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "position_current")
-    private String positionCurrent;
-
     @Column(name = "position_want")
     private String positionWant;
 
-    @NotNull
-    @Column(name = "degree", nullable = false)
-    private String degree;
-
-    @Column(name = "experience")
-    private String experience;
+    @Column(name = "year_of_experience")
+    private Integer yearOfExperience;
 
     @Column(name = "salary_want")
     private Integer salaryWant;
 
     @Column(name = "working_form")
     private String workingForm;
+
+    @Column(name = "career_objective")
+    private String careerObjective;
 
     @ManyToMany(cascade = CascadeType.PERSIST )
     @JoinTable(
@@ -89,15 +88,58 @@ public class CV {
             inverseJoinColumns = @JoinColumn(name = "industry_specialization_id"))
     private Set<IndustrySpecialization> industrySpecializations;
 
-    @Column(name = "description")
-    private String description;
+    @ManyToMany(cascade = CascadeType.PERSIST )
+    @JoinTable(
+            name = "cv_activity",
+            joinColumns = @JoinColumn(name = "cv_id"),
+            inverseJoinColumns = @JoinColumn(name = "activity_id"))
+    private Set<Activity> activities;
 
-    @Column(name = "work_experience")
-    private String workExperience;
+    @ManyToMany(cascade = CascadeType.PERSIST )
+    @JoinTable(
+            name = "cv_certificate",
+            joinColumns = @JoinColumn(name = "cv_id"),
+            inverseJoinColumns = @JoinColumn(name = "certificate_id"))
+    private Set<Certificate> certificates;
+
+    @ManyToMany(cascade = CascadeType.PERSIST )
+    @JoinTable(
+            name = "cv_education",
+            joinColumns = @JoinColumn(name = "cv_id"),
+            inverseJoinColumns = @JoinColumn(name = "education_id"))
+    private Set<Education> educations;
+
+    @ManyToMany(cascade = CascadeType.PERSIST )
+    @JoinTable(
+            name = "cv_experience",
+            joinColumns = @JoinColumn(name = "cv_id"),
+            inverseJoinColumns = @JoinColumn(name = "experience_id"))
+    private Set<Experience> experiences;
+
+    @ManyToMany(cascade = CascadeType.PERSIST )
+    @JoinTable(
+            name = "cv_hobby",
+            joinColumns = @JoinColumn(name = "cv_id"),
+            inverseJoinColumns = @JoinColumn(name = "hoppby_id"))
+    private Set<Hobby> hobbies;
+
+    @ManyToMany(cascade = CascadeType.PERSIST )
+    @JoinTable(
+            name = "projectId",
+            joinColumns = @JoinColumn(name = "cv_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private Set<Project> projects;
+
+    @ManyToMany(cascade = CascadeType.PERSIST )
+    @JoinTable(
+            name = "cv_reference_persons",
+            joinColumns = @JoinColumn(name = "cv_id"),
+            inverseJoinColumns = @JoinColumn(name = "reference_person_id"))
+    private Set<ReferencePerson> referencePeople;
 
     @NotNull
-    @Column(name = "isPrivate", nullable = false)
-    private boolean isPrivate;
+    @Column(name = "is_private", nullable = false)
+    private Boolean isPrivate;
 
     @NotNull
     @Column(name = "updated_at", nullable = false)

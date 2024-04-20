@@ -6,7 +6,9 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,7 +20,7 @@ import java.time.LocalDate;
 public class Bookmark {
 
     @EmbeddedId
-    private FollowId id;
+    private BookmarkId id;
 
     @MapsId("studentId")
     @OneToOne
@@ -31,6 +33,11 @@ public class Bookmark {
     private Job job;
 
     @NotNull
-    @Column(name = "createdAt", nullable = false)
-    private LocalDate createdAt;
+    @Column(name = "created_at", nullable = false)
+    private Instant createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) createdAt = new Date().toInstant();
+    }
 }

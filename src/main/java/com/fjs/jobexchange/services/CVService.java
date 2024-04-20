@@ -23,6 +23,22 @@ import java.util.List;
 public class CVService {
     private final CVRepository cvRepository;
     private final StudentService studentService;
+    private final UserService userService;
+
+    public CV get(Integer id) {
+        CV cv = cvRepository.findById(id)
+                .orElseThrow(() -> new ApiException("Hồ sơ tồn tại", HttpStatus.NOT_FOUND));
+
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getByUsername(name);
+        int userId = cv.getStudent().getId();
+
+        if (cv.getIsPrivate() && user != null && user.getUserId() != userId) {
+            throw new ApiException("Bài viết tạm thời không có sẵn với mọi người", HttpStatus.FORBIDDEN);
+        }
+
+        return cv;
+    }
 
     @Transactional
     public CV create(CVDto cvDto, List<Skill> skills, List<IndustrySpecialization> industrySpecializations) {
@@ -74,6 +90,25 @@ public class CVService {
         } catch (Exception e) {
             throw new ApiException("Lỗi! không thể tim kiếm", HttpStatus.FORBIDDEN);
         }
+    }
+
+    public CV findMyCV(Integer id){
+        CV cv =  cvRepository.findById(id)
+                .orElseThrow(() -> new ApiException("CV không tồn tại!", HttpStatus.BAD_REQUEST));
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getByUsername(name);
+        int userId = cv.getStudent().getId();
+
+        if (user != null && user.getUserId() != userId) {
+            throw new ApiException("Bạn không có quyền sử dụng CV này", HttpStatus.FORBIDDEN);
+        } else {
+            return cv;
+        }
+    }
+
+    public List<CV> findByStudentId(Integer studentId){
+        return cvRepository.findByStudentId(studentId)
+                .orElseThrow(() -> new ApiException("CV không tồn tại!", HttpStatus.BAD_REQUEST));
     }
 
 }

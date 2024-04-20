@@ -21,6 +21,11 @@ public class CVController {
     private final SkillService skillService;
     private final IndustrySpecializationService industrySpecializationService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> get(@PathVariable Integer id) {
+        return new ResponseEntity<>(cvService.get(id), HttpStatus.OK);
+    }
+
     @PreAuthorize("hasRole('student')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@Valid @RequestBody CVDto cvDto) {
@@ -38,8 +43,13 @@ public class CVController {
             @RequestParam(required = false, name = "province") String province,
             @RequestParam(required = false, name = "page",defaultValue="1") Integer page,
             @RequestParam(required = false, name = "limit", defaultValue = "10") int limit) {
-        System.out.println(industry);
 
         return new ResponseEntity<>(cvService.search( searchContent,industry, province, page, limit), HttpStatus.OK);
+    }
+
+    @GetMapping("/find/{studentId}")
+    public ResponseEntity<?> findByStudentId(@PathVariable Integer studentId) {
+        List<CV> cvList=  cvService.findByStudentId(studentId);
+        return new ResponseEntity<>(cvList, HttpStatus.OK);
     }
 }

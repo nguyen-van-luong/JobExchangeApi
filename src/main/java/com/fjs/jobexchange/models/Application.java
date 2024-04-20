@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.Instant;
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,31 +17,30 @@ import lombok.*;
 @Table(name = "application")
 public class Application {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    @EmbeddedId
+    private ApplicationId id;
 
+    @MapsId("jobId")
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "job_id", nullable = false, referencedColumnName = "id")
     private Job job;
 
+    @MapsId("cvId")
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "student_id", nullable = false, referencedColumnName = "id")
-    private Student student;
-
-    @Size(max = 10)
-    @NotNull
-    @Column(name = "phone_number", nullable = false, length = 10)
-    private String phoneNumber;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "cv_id", nullable = false, referencedColumnName = "id")
+    private CV cv;
 
     @Column(name = "status")
     private String status;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "CV_id", nullable = false, referencedColumnName = "id")
-    private CV CV;
+    @Column(name = "created_at", nullable = false)
+    private Instant createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) createdAt = new Date().toInstant();
+    }
 }

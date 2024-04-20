@@ -11,9 +11,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "skills")
-public class Skill {
-
+@Table(name = "projects")
+public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -23,12 +22,15 @@ public class Skill {
     @Column(name = "student_id", nullable = false)
     private Integer studentId;
 
-    @Size(max = 100)
     @NotNull
-    @Column(name = "name", nullable = false, length = 100)
-    private String name;
+    @Column(name = "company", nullable = false)
+    private String company;
 
     @NotNull
-    @Column(name = "level", nullable = false)
-    private String level;
+    @Column(name = "project_name", nullable = false)
+    private String projectName;
+
+    @NotNull
+    @Column(name = "description", nullable = false)
+    private String description;
 }

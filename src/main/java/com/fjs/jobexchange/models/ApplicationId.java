@@ -16,14 +16,13 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 @Embeddable
-public class BookmarkId implements Serializable {
-
+public class ApplicationId implements Serializable {
     @Serial
     private static final long serialVersionUID = 1932590682598799897L;
 
     @NotNull
-    @Column(name = "student_id", nullable = false)
-    private Integer studentId;
+    @Column(name = "cv_id", nullable = false)
+    private Integer cvId;
     @NotNull
     @Column(name = "job_id", nullable = false)
     private Integer jobId;
@@ -32,13 +31,13 @@ public class BookmarkId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        BookmarkId entity = (BookmarkId) o;
-        return Objects.equals(this.studentId, entity.studentId) &&
+        ApplicationId entity = (ApplicationId) o;
+        return Objects.equals(this.cvId, entity.cvId) &&
                 Objects.equals(this.jobId, entity.jobId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, jobId);
+        return Objects.hash(cvId, jobId);
     }
 }

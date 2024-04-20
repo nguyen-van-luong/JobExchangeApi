@@ -2,7 +2,6 @@ package com.fjs.jobexchange.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Getter
@@ -11,9 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "skills")
-public class Skill {
-
+@Table(name = "certificates")
+public class Certificate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -23,12 +21,7 @@ public class Skill {
     @Column(name = "student_id", nullable = false)
     private Integer studentId;
 
-    @Size(max = 100)
     @NotNull
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(name = "name", nullable = false)
     private String name;
-
-    @NotNull
-    @Column(name = "level", nullable = false)
-    private String level;
 }

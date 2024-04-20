@@ -16,29 +16,30 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 @Embeddable
-public class BookmarkId implements Serializable {
+public class CVExperienceId implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1932590682598799897L;
+    private static final long serialVersionUID = 1234567800123466789L;
 
     @NotNull
-    @Column(name = "student_id", nullable = false)
-    private Integer studentId;
+    @Column(name = "cv_id", nullable = false)
+    private Integer cvId;
+
     @NotNull
-    @Column(name = "job_id", nullable = false)
-    private Integer jobId;
+    @Column(name = "experience_id", nullable = false)
+    private Integer experienceId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        BookmarkId entity = (BookmarkId) o;
-        return Objects.equals(this.studentId, entity.studentId) &&
-                Objects.equals(this.jobId, entity.jobId);
+        CVExperienceId entity = (CVExperienceId) o;
+        return Objects.equals(this.experienceId, entity.experienceId) &&
+                Objects.equals(this.cvId, entity.cvId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(studentId, jobId);
+        return Objects.hash(experienceId, cvId);
     }
 }

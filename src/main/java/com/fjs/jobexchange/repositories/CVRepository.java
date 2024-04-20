@@ -8,10 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface CVRepository  extends JpaRepository<CV, Integer> {
 
     @Query("SELECT p FROM CV p JOIN p.industrySpecializations u JOIN p.province t WHERE (p.fullname LIKE %:searchContent% OR p.description LIKE %:searchContent% OR p.workingForm LIKE %:searchContent%) AND (:industry IS NULL OR :industry IN (SELECT u.industry.name FROM p.industrySpecializations u)) AND (:province IS NULL OR t.name = :province) AND p.isPrivate = false")
     Page<CV> findByProvinceAndIndustryAndMore(@Param("searchContent") String searchContent, @Param("industry") String industry, @Param("province") String province,
                                                Pageable pageable);
+    Optional<List<CV>> findByStudentId(Integer studentId);
 }
